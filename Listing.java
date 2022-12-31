@@ -1,18 +1,18 @@
-package finalproject;
+package projectfin;
 
 import java.util.*;
 
 public class Listing {
 
-    public static void randomEntities(ArrayList<String> entireList, int entities) {
-        ArrayList<String> randomList = new ArrayList<String>();
+    public static void randomEntities(ArrayList<FieldsIkea> productList, int entities) {
+        ArrayList<FieldsIkea> randomList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
 
         for (int i = 0; i < entities; i++) {
             int r;
-            System.out.println(entireList.get(r = random.nextInt(0, 3694)) + "\n");
-            randomList.add(entireList.get(r));
+            System.out.println(productList.get(r = random.nextInt(0, 3694)) + "\n");
+            randomList.add(productList.get(r));
 
         }
 
@@ -31,22 +31,23 @@ public class Listing {
             String[] fields;
             System.out.print("\nSelect entity(starting from 0): ");
             int selectedEntity = sc.nextInt();
-            fields = randomList.get(selectedEntity).split(",");
 
-            System.out.print("Select field(starting from 0): ");
-            int selectedField = sc.nextInt();
-            System.out.println(fields[selectedField]);
+            System.out.print("Select field: ");
+            sc.nextLine();
+            String selectedField = sc.nextLine();
+            randomList.get(selectedEntity).printSelectedField(selectedField);
         }
 
     }
 
-    public static void topEntities(ArrayList<String> entireList, int entities) {
-        ArrayList<String> topList = new ArrayList<String>();
+    // #region
+    public static void topEntities(ArrayList<FieldsIkea> productList, int entities) {
+        ArrayList<FieldsIkea> topList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         for (int i = 0; i < entities; i++) {
-            System.out.println(entireList.get(i) + "\n");
-            topList.add(entireList.get(i));
+            System.out.println(productList.get(i) + "\n");
+            topList.add(productList.get(i));
         }
 
         System.out.println("1 for printing all fields of selected entity");
@@ -64,22 +65,25 @@ public class Listing {
             String[] fields;
             System.out.print("\nSelect entity(starting from 0): ");
             int selectedEntity = sc.nextInt();
-            fields = topList.get(selectedEntity).split(",");
 
-            System.out.print("Select field(starting from 0): ");
-            int selectedField = sc.nextInt();
-            System.out.println(fields[selectedField]);
+            System.out.print("Select field: ");
+            sc.nextLine();
+            String selectedField = sc.nextLine();
+            topList.get(selectedEntity).printSelectedField(selectedField);
+
         }
 
     }
 
-    public static void bottomEntities(ArrayList<String> entireList, int entities) {
-        ArrayList<String> bottomList = new ArrayList<String>();
+    // #endregion
+    // #region
+    public static void bottomEntities(ArrayList<FieldsIkea> productList, int entities) {
+        ArrayList<FieldsIkea> bottomList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
-        for (int i = entireList.size() - 1; i > entireList.size() - (entities + 1); i--) {
-            System.out.println(entireList.get(i) + "\n");
-            bottomList.add(entireList.get(i));
+        for (int i = productList.size() - 1; i > productList.size() - (entities + 1); i--) {
+            System.out.println(productList.get(i) + "\n");
+            bottomList.add(productList.get(i));
         }
 
         System.out.println("1 for printing all fields of selected entity");
@@ -97,12 +101,13 @@ public class Listing {
             String[] fields;
             System.out.print("\nSelect entity(starting from 0): ");
             int selectedEntity = sc.nextInt();
-            fields = bottomList.get(selectedEntity).split(",");
 
             System.out.print("Select field(starting from 0): ");
-            int selectedField = sc.nextInt();
-            System.out.println(fields[selectedField]);
+            sc.nextLine();
+            String selectedField = sc.nextLine();
+            bottomList.get(selectedEntity).printSelectedField(selectedField);
         }
-
     }
+    // #endregion
+
 }

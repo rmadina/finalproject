@@ -1,4 +1,5 @@
-package finalproject;
+package projectfin;
+
 
 import java.util.*;
 
