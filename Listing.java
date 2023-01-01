@@ -1,18 +1,18 @@
-package projectfin;
+package finalproject;
 
 import java.util.*;
 
 public class Listing {
 
-    public static void randomEntities(ArrayList<FieldsIkea> productList, int entities) {
+    public static void randomEntities(ArrayList<FieldsIkea> ikeaList, int entities) {
         ArrayList<FieldsIkea> randomList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
         Random random = new Random();
 
         for (int i = 0; i < entities; i++) {
             int r;
-            System.out.println(productList.get(r = random.nextInt(0, 3694)) + "\n");
-            randomList.add(productList.get(r));
+            System.out.println(ikeaList.get(r = random.nextInt(0, 3694)) + "\n");
+            randomList.add(ikeaList.get(r));
 
         }
 
@@ -35,19 +35,20 @@ public class Listing {
             System.out.print("Select field: ");
             sc.nextLine();
             String selectedField = sc.nextLine();
-            randomList.get(selectedEntity).printSelectedField(selectedField);
+            System.out.println(randomList.get(selectedEntity).getSelectedField(selectedField));
+            
         }
 
     }
 
     // #region
-    public static void topEntities(ArrayList<FieldsIkea> productList, int entities) {
+    public static void topEntities(ArrayList<FieldsIkea> ikeaList, int entities) {
         ArrayList<FieldsIkea> topList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
         for (int i = 0; i < entities; i++) {
-            System.out.println(productList.get(i) + "\n");
-            topList.add(productList.get(i));
+            System.out.println(ikeaList.get(i) + "\n");
+            topList.add(ikeaList.get(i));
         }
 
         System.out.println("1 for printing all fields of selected entity");
@@ -69,7 +70,8 @@ public class Listing {
             System.out.print("Select field: ");
             sc.nextLine();
             String selectedField = sc.nextLine();
-            topList.get(selectedEntity).printSelectedField(selectedField);
+            System.out.println(topList.get(selectedEntity).getSelectedField(selectedField));
+            
 
         }
 
@@ -77,13 +79,13 @@ public class Listing {
 
     // #endregion
     // #region
-    public static void bottomEntities(ArrayList<FieldsIkea> productList, int entities) {
+    public static void bottomEntities(ArrayList<FieldsIkea> ikeaList, int entities) {
         ArrayList<FieldsIkea> bottomList = new ArrayList<>();
         Scanner sc = new Scanner(System.in);
 
-        for (int i = productList.size() - 1; i > productList.size() - (entities + 1); i--) {
-            System.out.println(productList.get(i) + "\n");
-            bottomList.add(productList.get(i));
+        for (int i = ikeaList.size() - 1; i > ikeaList.size() - (entities + 1); i--) {
+            System.out.println(ikeaList.get(i) + "\n");
+            bottomList.add(ikeaList.get(i));
         }
 
         System.out.println("1 for printing all fields of selected entity");
@@ -105,7 +107,8 @@ public class Listing {
             System.out.print("Select field(starting from 0): ");
             sc.nextLine();
             String selectedField = sc.nextLine();
-            bottomList.get(selectedEntity).printSelectedField(selectedField);
+            System.out.println(bottomList.get(selectedEntity).getSelectedField(selectedField));
+            
         }
     }
     // #endregion

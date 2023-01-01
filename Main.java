@@ -1,30 +1,28 @@
-package projectfin;
+package finalproject;
 
 import java.io.*;
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 class Main {
     public static void main(String... args) {
         // #region
         boolean goOn = true;
         Scanner scanner = new Scanner(System.in);
-        ArrayList<FieldsIkea> productList = new ArrayList<>();
+        ArrayList<FieldsIkea> ikeaList = new ArrayList<>();
+        String columnNames[] = new String[20];
 
-        try (FileReader fr = new FileReader("D:\\pp2\\projectfin\\ikeaText.txt");
+        try (FileReader fr = new FileReader("C:\\Users\\Nahid\\Documents\\GitHub\\finalproject\\ikeaText.txt");
                 BufferedReader br = new BufferedReader(fr);) {
 
-            br.readLine();
+            columnNames = br.readLine().split(",");
             String tempString;
             String fields[];
-
 
             while ((tempString = br.readLine()) != null) {
 
                 fields = tempString.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
                 FieldsIkea fieldsIkea = new FieldsIkea(fields);
-                productList.add(fieldsIkea);
+                ikeaList.add(fieldsIkea);
             }
 
         } catch (IOException e) {
@@ -37,10 +35,14 @@ class Main {
 
             System.out.println("Please select what you want to do with list.");
 
-            System.out.println("1 for selecting from list");
+            System.out.println("1 for listing");
             System.out.println("2 for sorting");
             System.out.println("3 for searching");
-            System.out.println("4 for exit");
+            System.out.println("4 for listing column names");
+            System.out.println("5 for filtering");
+            System.out.println("6 for designers");
+            System.out.println("7 for separating and storing entity with selected category in separate .csv file");
+            System.out.println("8 for exit");
 
             String command = scanner.nextLine();
             // #endregion
@@ -54,25 +56,24 @@ class Main {
                 System.out.println("2 for listing top n entities");
                 System.out.println("3 for listing bottom n entities");
                 System.out.println("4 for exit");
-
                 String selectionFormat = scanner.nextLine();
 
                 if (selectionFormat.equals("1")) {
                     System.out.println("\nPlease print number of random entities to be listed: ");//
                     int entities = scanner.nextInt();
-                    Listing.randomEntities(productList, entities);
+                    Listing.randomEntities(ikeaList, entities);
                 }
 
                 else if (selectionFormat.equals("2")) {
                     System.out.println("\nPlease select number of top entities to be listed:");
                     int listCount2 = scanner.nextInt();
-                    Listing.topEntities(productList, listCount2);
+                    Listing.topEntities(ikeaList, listCount2);
                 }
 
                 else if (selectionFormat.equals("3")) {
                     System.out.println("\nPlease select number of bottom entities to be listed:");
                     int listCount3 = scanner.nextInt();
-                    Listing.bottomEntities(productList, listCount3);
+                    Listing.bottomEntities(ikeaList, listCount3);
                 } else if (selectionFormat.equals("4")) {
                     break;
                 }
@@ -87,17 +88,28 @@ class Main {
 
             // #region
             else if (command.equals("2")) {
-                // Sorting.sorting(productList);
+                Sorting.sorting(ikeaList);
 
-            } else if (command.equals("3")) {
-                // Searching.searching(productList);4
-
-            }
+            } else if (command.equals("3"))
+                Searching.searching(ikeaList);
 
             else if (command.equals("4"))
+                System.out.println(Arrays.toString(columnNames));
+
+            else if (command.equals("5"))
+                Filtering.filtering();
+
+            else if (command.equals("6"))
+                return;
+
+            else if (command.equals("7")) {
+                // Separation.separation(ikeaList);
+            }
+
+            else if (command.equals("8"))
                 break;
             else {
-                System.out.println("Please choose numbers between 1-4\n");
+                System.out.println("Please choose numbers between 1-8\n");
                 continue;
             }
 

@@ -1,4 +1,4 @@
-package projectfin;
+package finalproject;
 
 import java.util.*;
 
@@ -13,7 +13,7 @@ public class Searching {
         String valueOfSearch = scanner.nextLine();
 
         for (int i = 0; i < entireList.size(); i++) {
-            if (valueOfSearch == entireList.get(i).get)
+            if (valueOfSearch.equals(entireList.get(i).getSelectedField(selectedField)))
                 System.out.println(entireList.get(i));
         }
 

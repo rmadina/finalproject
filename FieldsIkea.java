@@ -1,6 +1,6 @@
-package projectfin;
+package finalproject;
 
-public class FieldsIkea<T> {
+public class FieldsIkea {
 
     private Integer id;
     private Integer itemId;
@@ -17,7 +17,11 @@ public class FieldsIkea<T> {
     private Float height;
     private Float width;
 
-    FieldsIkea(String[] fields) {
+    public FieldsIkea() {
+
+    }
+
+    public FieldsIkea(String[] fields) {
         id = Integer.parseInt(fields[0]);
         itemId = Integer.parseInt(fields[1]);
         name = fields[2];
@@ -30,88 +34,93 @@ public class FieldsIkea<T> {
         shortDescription = fields[9];
         designer = fields[10];
 
-        
         // try{
-            if(fields.length>11)
-                depth = (fields[11] == null || fields[11] == "") ? 0 : Float.parseFloat(fields[11]);
+        if (fields.length > 11)
+            depth = (fields[11] == null || fields[11] == "") ? 0 : Float.parseFloat(fields[11]);
 
-            if(fields.length>12)
-                height = (fields[12] == null || fields[12] == "") ? 0 : Float.parseFloat(fields[12]);
+        if (fields.length > 12)
+            height = (fields[12] == null || fields[12] == "") ? 0 : Float.parseFloat(fields[12]);
 
-            if(fields.length>13)
-                width = (fields[13] == null || fields[13] == "") ? 0 : Float.parseFloat(fields[13]);
+        if (fields.length > 13)
+            width = (fields[13] == null || fields[13] == "") ? 0 : Float.parseFloat(fields[13]);
 
         // }
         // catch(Exception ex){
-        //     System.out.println(fields[0]);
-        //     return;
+        // System.out.println(fields[0]);
+        // return;
         // }
-        // depth = Float.parseFloat(fields[11] == null || fields[11] == "" ? "0" : fields[11]);
+        // depth = Float.parseFloat(fields[11] == null || fields[11] == "" ? "0" :
+        // fields[11]);
         // height = Float.parseFloat(fields[12]);
         // width = Float.parseFloat(fields[13]);
 
     }
 
-    public String printSelectedField(String selectedField) {
+    public String getSelectedField(String selectedField) {
 
-    String fieldValue="";
+        String fieldValue = "";
 
         switch (selectedField) {
             case "id":
-            fieldValue = getId();
+                fieldValue = getIdString();
                 break;
-            // case "itemId":
-            //     printItemId();
-            //     break;
-            // case "name":
-            //     printName();
-            //     break;
-            // case "category":
-            //     printCategory();
-            //     break;
-            // case "price":
-            //     printPrice();
-            //     break;
-            // case "oldPrice":
-            //     printOldPrice();
-            //     break;
-            // case "sellableOnline":
-            //     printSellableOnline();
-            //     break;
-            // case "otherColors":
-            //     printOtherColors();
-            //     break;
-            // case "shortDescription":
-            //     printShortDescription();
-            //     break;
-            // case "designer":
-            //     printDesigner();
-            //     break;
-            // case "depth":
-            //     printDepth();
-            //     break;
-            // case "height":
-            //     printHeight();
-            //     break;
-            // case "width":
-            //     printWidth();
-            //     break;
+            case "itemId":
+                fieldValue = getItemIdString();
+                break;
+            case "name":
+                fieldValue = getName();
+                break;
+            case "category":
+                fieldValue = getCategory();
+                break;
+            case "price":
+                fieldValue = getPriceString();
+                break;
+            case "oldPrice":
+                fieldValue = getOldPrice();
+                break;
+            case "sellableOnline":
+                fieldValue = getSellableOnlineString();
+                break;
+            case "otherColors":
+                fieldValue = getOtherColors();
+                break;
+            case "shortDescription":
+                fieldValue = getShortDescription();
+                break;
+            case "designer":
+                fieldValue = getDesigner();
+                break;
+            case "depth":
+                fieldValue = getDepthString();
+                break;
+            case "height":
+                fieldValue = getHeightString();
+                break;
+            case "width":
+                fieldValue = getWidthString();
+                break;
 
-            default:
-                break;
         }
 
         return fieldValue;
     }
 
-
     // #region
-    public String getId() {
+    public Integer getId() {
+        return id;
+    }
+
+    public String getIdString() {
         return id.toString();
     }
 
-    public int getItemId() {
+    public Integer getItemId() {
         return itemId;
+    }
+
+    public String getItemIdString() {
+        return itemId.toString();
     }
 
     public String getName() {
@@ -122,8 +131,12 @@ public class FieldsIkea<T> {
         return category;
     }
 
-    public float getPrice() {
+    public Float getPrice() {
         return price;
+    }
+
+    public String getPriceString() {
+        return price.toString();
     }
 
     public String getOldPrice() {
@@ -132,6 +145,10 @@ public class FieldsIkea<T> {
 
     public Boolean getSellableOnline() {
         return sellableOnline;
+    }
+
+    public String getSellableOnlineString() {
+        return sellableOnline.toString();
     }
 
     public String getLink() {
@@ -146,18 +163,33 @@ public class FieldsIkea<T> {
         return shortDescription;
     }
 
-    public float getDepth() {
+    public String getDesigner() {
+        return designer;
+    }
+
+    public Float getDepth() {
         return depth;
     }
 
-    public float getHeight() {
+    public String getDepthString() {
+        return depth.toString();
+    }
+
+    public Float getHeight() {
         return height;
     }
 
-    public float getWidth() {
-        return width;
+    public String getHeightString() {
+        return height.toString();
     }
 
+    public Float getWidth() {
+        return width;
+    }
+    
+    public String getWidthString() {
+        return width.toString();
+    }
     // #endregion
 
     @Override
