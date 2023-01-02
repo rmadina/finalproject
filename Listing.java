@@ -4,111 +4,186 @@ import java.util.*;
 
 public class Listing {
 
-    public static void randomEntities(ArrayList<FieldsIkea> ikeaList, int entities) {
-        ArrayList<FieldsIkea> randomList = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
-        Random random = new Random();
+    public static void listing(ArrayList<FieldsIkea> list) {
+        Scanner scanner = new Scanner(System.in);
 
-        for (int i = 0; i < entities; i++) {
-            int r;
-            System.out.println(ikeaList.get(r = random.nextInt(0, 3694)) + "\n");
-            randomList.add(ikeaList.get(r));
+        System.out.println("\nChoose selection format:");
+        System.out.println("Print \"random\" for listing and printing randomly selected n entities");
+        System.out.println("Print \"top\" for listing and printing top n entities");
+        System.out.println("Print \"bottom\" for listing and printing bottom n entities");
+        System.out.println("Print \"exit\" for exit");
+        String selectionFormat = scanner.nextLine().toLowerCase();
+
+        if (selectionFormat.equals("random")) {
+            randomEntities(list);
+        }
+
+        else if (selectionFormat.equals("top")) {
+            topEntities(list);
+        }
+
+        else if (selectionFormat.equals("bottom")) {
+            bottomEntities(list);
+        }
+
+        else if (selectionFormat.equals("exit")) {
 
         }
 
-        System.out.println("1 for printing all fields of selected entity");
-        System.out.println("2 for printing selected field of selected entity");
-        System.out.println("3 for exit");
-        int displayFormat = sc.nextInt();
-
-        if (displayFormat == 1) {
-            System.out.print("\nSelect entity(starting from 0): ");
-            int selectedEntity = sc.nextInt();
-            System.out.println(randomList.get(selectedEntity));
-        }
-
-        if (displayFormat == 2) {
-            String[] fields;
-            System.out.print("\nSelect entity(starting from 0): ");
-            int selectedEntity = sc.nextInt();
-
-            System.out.print("Select field: ");
-            sc.nextLine();
-            String selectedField = sc.nextLine();
-            System.out.println(randomList.get(selectedEntity).getSelectedField(selectedField));
-            
+        else {
+            System.out.println("Please print accurately\n");
+            listing(list);
         }
 
     }
 
+    // public static void listingSorted() {
+    // listing(Sorting.getSortedList());
+    // }
+
     // #region
-    public static void topEntities(ArrayList<FieldsIkea> ikeaList, int entities) {
+    public static void randomEntities(ArrayList<FieldsIkea> list) {
+        Scanner scanner = new Scanner(System.in);
+        Random random = new Random();
+        ArrayList<FieldsIkea> randomList = new ArrayList<>();
+
+        System.out.println("\nPlease print number of random entities to be listed: ");//
+        int numOfEntities = scanner.nextInt();
+
+        for (int i = 0; i < numOfEntities; i++) {
+            int r;
+            System.out.println(list.get(r = random.nextInt(0, 3694)) + "\n");
+            randomList.add(list.get(r));
+
+        }
+
+        while (true) {
+            System.out.println("1 for displaying all fields of selected entity");
+            System.out.println("2 for displaying selected field of selected entity");
+            System.out.println("\"exit\" for exiting");
+            scanner.nextLine();
+            String displayFormat = scanner.nextLine();
+
+            if (displayFormat.equals("1")) {
+                System.out.print("\nSelect entity(starting from 0): ");
+                int selectedEntity = scanner.nextInt();
+                System.out.println(randomList.get(selectedEntity));
+                break;
+            }
+
+            else if (displayFormat.equals("2")) {
+                String[] fields;
+                System.out.print("\nSelect entity(starting from 0): ");
+                int selectedEntity = scanner.nextInt();
+
+                System.out.print("Select field: ");
+                scanner.nextLine();
+                String selectedField = scanner.nextLine();
+                System.out.println(randomList.get(selectedEntity).getSelectedField(selectedField));
+                break;
+
+            } else if (displayFormat.equals("exit")) {
+                break;
+            }
+
+            else {
+                System.out.println("\nPlease print accurately");
+            }
+        }
+
+    }
+    // #endregion
+
+    // #region
+    public static void topEntities(ArrayList<FieldsIkea> list) {
         ArrayList<FieldsIkea> topList = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        for (int i = 0; i < entities; i++) {
-            System.out.println(ikeaList.get(i) + "\n");
-            topList.add(ikeaList.get(i));
+        System.out.println("\nPlease select number of top entities to be listed:");
+        int numOfEntities = scanner.nextInt();
+
+        for (int i = 0; i < numOfEntities; i++) {
+            System.out.println(list.get(i) + "\n");
+            topList.add(list.get(i));
         }
 
-        System.out.println("1 for printing all fields of selected entity");
-        System.out.println("2 for printing selected field of selected entity");
-        System.out.println("3 for exit");
-        int displayFormat = sc.nextInt();
+        while (true) {
+            System.out.println("1 for printing all fields of selected entity");
+            System.out.println("2 for printing selected field of selected entity");
+            System.out.println("\"exit\" for exit");
+            scanner.nextLine();
+            String displayFormat = scanner.nextLine();
 
-        if (displayFormat == 1) {
-            System.out.print("\nSelect entity(starting from 0): ");
-            int selectedEntity = sc.nextInt();
-            System.out.println(topList.get(selectedEntity));
-        }
+            if (displayFormat.equals("1")) {
+                System.out.print("\nSelect entity(starting from 0): ");
+                int selectedEntity = scanner.nextInt();
+                System.out.println(topList.get(selectedEntity));
+                break;
+            }
 
-        if (displayFormat == 2) {
-            String[] fields;
-            System.out.print("\nSelect entity(starting from 0): ");
-            int selectedEntity = sc.nextInt();
+            else if (displayFormat.equals("2")) {
+                String[] fields;
+                System.out.print("\nSelect entity(starting from 0): ");
+                int selectedEntity = scanner.nextInt();
 
-            System.out.print("Select field: ");
-            sc.nextLine();
-            String selectedField = sc.nextLine();
-            System.out.println(topList.get(selectedEntity).getSelectedField(selectedField));
-            
+                System.out.print("Select field: ");
+                scanner.nextLine();
+                String selectedField = scanner.nextLine();
+                System.out.println(topList.get(selectedEntity).getSelectedField(selectedField));
+                break;
 
+            } else if (displayFormat.equals("exit")) {
+                break;
+            } else {
+                System.out.println("Please print accurately");
+            }
         }
 
     }
 
     // #endregion
     // #region
-    public static void bottomEntities(ArrayList<FieldsIkea> ikeaList, int entities) {
+    public static void bottomEntities(ArrayList<FieldsIkea> list) {
         ArrayList<FieldsIkea> bottomList = new ArrayList<>();
-        Scanner sc = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        for (int i = ikeaList.size() - 1; i > ikeaList.size() - (entities + 1); i--) {
-            System.out.println(ikeaList.get(i) + "\n");
-            bottomList.add(ikeaList.get(i));
+        System.out.println("\nPlease select number of bottom entities to be listed:");
+        int numOfEntities = scanner.nextInt();
+
+        for (int i = list.size() - 1; i > list.size() - (numOfEntities + 1); i--) {
+            System.out.println(list.get(i) + "\n");
+            bottomList.add(list.get(i));
         }
 
-        System.out.println("1 for printing all fields of selected entity");
-        System.out.println("2 for printing selected field of selected entity");
-        System.out.println("3 for exit");
-        int displayFormat = sc.nextInt();
+        while (true) {
+            System.out.println("1 for printing all fields of selected entity");
+            System.out.println("2 for printing selected field of selected entity");
+            System.out.println("3 for exit");
+            scanner.nextLine();
+            String displayFormat = scanner.nextLine();
 
-        if (displayFormat == 1) {
-            System.out.print("\nSelect entity(starting from 0): ");
-            int selectedEntity = sc.nextInt();
-            System.out.println(bottomList.get(selectedEntity));
-        }
+            if (displayFormat.equals("1")) {
+                System.out.print("\nSelect entity(starting from 0): ");
+                int selectedEntity = scanner.nextInt();
+                System.out.println(bottomList.get(selectedEntity));
+                break;
+            }
 
-        if (displayFormat == 2) {
-            String[] fields;
-            System.out.print("\nSelect entity(starting from 0): ");
-            int selectedEntity = sc.nextInt();
+            else if (displayFormat.equals("2")) {
+                String[] fields;
+                System.out.print("\nSelect entity(starting from 0): ");
+                int selectedEntity = scanner.nextInt();
 
-            System.out.print("Select field(starting from 0): ");
-            sc.nextLine();
-            String selectedField = sc.nextLine();
-            System.out.println(bottomList.get(selectedEntity).getSelectedField(selectedField));
-            
+                System.out.print("Select field(starting from 0): ");
+                scanner.nextLine();
+                String selectedField = scanner.nextLine();
+                System.out.println(bottomList.get(selectedEntity).getSelectedField(selectedField));
+                break;
+
+            } else if (displayFormat.equals("exit")) {
+                break;
+            } else
+                System.out.println("Please print carefully");
         }
     }
     // #endregion

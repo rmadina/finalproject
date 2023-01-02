@@ -64,7 +64,7 @@ public class FieldsIkea {
             case "id":
                 fieldValue = getIdString();
                 break;
-            case "itemId":
+            case "itemid":
                 fieldValue = getItemIdString();
                 break;
             case "name":
@@ -76,16 +76,16 @@ public class FieldsIkea {
             case "price":
                 fieldValue = getPriceString();
                 break;
-            case "oldPrice":
+            case "oldprice":
                 fieldValue = getOldPrice();
                 break;
-            case "sellableOnline":
+            case "sellableonline":
                 fieldValue = getSellableOnlineString();
                 break;
-            case "otherColors":
+            case "othercolors":
                 fieldValue = getOtherColors();
                 break;
-            case "shortDescription":
+            case "shortdescription":
                 fieldValue = getShortDescription();
                 break;
             case "designer":
