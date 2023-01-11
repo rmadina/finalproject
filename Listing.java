@@ -31,15 +31,11 @@ public class Listing {
         }
 
         else {
-            System.out.println("Please print accurately\n");
+            System.out.println("\nPlease print accurately");
             listing(list);
         }
 
     }
-
-    // public static void listingSorted() {
-    // listing(Sorting.getSortedList());
-    // }
 
     // #region
     public static void randomEntities(ArrayList<FieldsIkea> list) {
@@ -47,50 +43,50 @@ public class Listing {
         Random random = new Random();
         ArrayList<FieldsIkea> randomList = new ArrayList<>();
 
-        System.out.println("\nPlease print number of random entities to be listed: ");//
+        System.out.println("\nPlease print number of random entities to be listed: ");
         int numOfEntities = scanner.nextInt();
+        if (numOfEntities > 0 && numOfEntities <= list.size()) {
+            for (int i = 0; i < numOfEntities; i++) {
+                int r;
+                System.out.println(list.get(r = random.nextInt(0, 3694)) + "\n");
+                randomList.add(list.get(r));
 
-        for (int i = 0; i < numOfEntities; i++) {
-            int r;
-            System.out.println(list.get(r = random.nextInt(0, 3694)) + "\n");
-            randomList.add(list.get(r));
-
-        }
-
-        while (true) {
-            System.out.println("1 for displaying all fields of selected entity");
-            System.out.println("2 for displaying selected field of selected entity");
-            System.out.println("\"exit\" for exiting");
-            scanner.nextLine();
-            String displayFormat = scanner.nextLine();
-
-            if (displayFormat.equals("1")) {
-                System.out.print("\nSelect entity(starting from 0): ");
-                int selectedEntity = scanner.nextInt();
-                System.out.println(randomList.get(selectedEntity));
-                break;
             }
 
-            else if (displayFormat.equals("2")) {
-                String[] fields;
-                System.out.print("\nSelect entity(starting from 0): ");
-                int selectedEntity = scanner.nextInt();
-
-                System.out.print("Select field: ");
+            while (true) {
+                System.out.println("1 for displaying all fields of selected entity");
+                System.out.println("2 for displaying selected field of selected entity");
+                System.out.println("\"exit\" for exiting");
                 scanner.nextLine();
-                String selectedField = scanner.nextLine();
-                System.out.println(randomList.get(selectedEntity).getSelectedField(selectedField));
-                break;
+                String displayFormat = scanner.nextLine();
 
-            } else if (displayFormat.equals("exit")) {
-                break;
+                if (displayFormat.equals("1")) {
+                    System.out.print("\nSelect entity(starting from 0): ");
+                    int selectedEntity = scanner.nextInt();
+                    System.out.println(randomList.get(selectedEntity));
+                    break;
+                }
+
+                else if (displayFormat.equals("2")) {
+                    System.out.print("\nSelect entity(starting from 0): ");
+                    int selectedEntity = scanner.nextInt();
+
+                    System.out.print("Select field: ");
+                    scanner.nextLine();
+                    String selectedField = scanner.nextLine().toLowerCase();
+                    System.out.println(randomList.get(selectedEntity).getSelectedField(selectedField));
+                    break;
+
+                } else if (displayFormat.equals("exit")) {
+                    break;
+                }
+
+                else {
+                    System.out.println("\nPlease print accurately");
+                }
             }
 
-            else {
-                System.out.println("\nPlease print accurately");
-            }
         }
-
     }
     // #endregion
 
@@ -101,41 +97,42 @@ public class Listing {
 
         System.out.println("\nPlease select number of top entities to be listed:");
         int numOfEntities = scanner.nextInt();
-
-        for (int i = 0; i < numOfEntities; i++) {
-            System.out.println(list.get(i) + "\n");
-            topList.add(list.get(i));
-        }
-
-        while (true) {
-            System.out.println("1 for printing all fields of selected entity");
-            System.out.println("2 for printing selected field of selected entity");
-            System.out.println("\"exit\" for exit");
-            scanner.nextLine();
-            String displayFormat = scanner.nextLine();
-
-            if (displayFormat.equals("1")) {
-                System.out.print("\nSelect entity(starting from 0): ");
-                int selectedEntity = scanner.nextInt();
-                System.out.println(topList.get(selectedEntity));
-                break;
+        if (numOfEntities > 0 && numOfEntities <= list.size()) {
+            for (int i = 0; i < numOfEntities; i++) {
+                System.out.println(list.get(i) + "\n");
+                topList.add(list.get(i));
             }
 
-            else if (displayFormat.equals("2")) {
-                String[] fields;
-                System.out.print("\nSelect entity(starting from 0): ");
-                int selectedEntity = scanner.nextInt();
-
-                System.out.print("Select field: ");
+            while (true) {
+                System.out.println("1 for printing all fields of selected entity");
+                System.out.println("2 for printing selected field of selected entity");
+                System.out.println("\"exit\" for exit");
                 scanner.nextLine();
-                String selectedField = scanner.nextLine();
-                System.out.println(topList.get(selectedEntity).getSelectedField(selectedField));
-                break;
+                String displayFormat = scanner.nextLine();
 
-            } else if (displayFormat.equals("exit")) {
-                break;
-            } else {
-                System.out.println("Please print accurately");
+                if (displayFormat.equals("1")) {
+                    System.out.print("\nSelect entity(starting from 0): ");
+                    int selectedEntity = scanner.nextInt();
+                    System.out.println(topList.get(selectedEntity));
+                    break;
+                }
+
+                else if (displayFormat.equals("2")) {
+                    String[] fields;
+                    System.out.print("\nSelect entity(starting from 0): ");
+                    int selectedEntity = scanner.nextInt();
+
+                    System.out.print("Select field: ");
+                    scanner.nextLine();
+                    String selectedField = scanner.nextLine().toLowerCase();
+                    System.out.println(topList.get(selectedEntity).getSelectedField(selectedField));
+                    break;
+
+                } else if (displayFormat.equals("exit")) {
+                    break;
+                } else {
+                    System.out.println("Please print accurately");
+                }
             }
         }
 
@@ -149,43 +146,44 @@ public class Listing {
 
         System.out.println("\nPlease select number of bottom entities to be listed:");
         int numOfEntities = scanner.nextInt();
-
-        for (int i = list.size() - 1; i > list.size() - (numOfEntities + 1); i--) {
-            System.out.println(list.get(i) + "\n");
-            bottomList.add(list.get(i));
-        }
-
-        while (true) {
-            System.out.println("1 for printing all fields of selected entity");
-            System.out.println("2 for printing selected field of selected entity");
-            System.out.println("3 for exit");
-            scanner.nextLine();
-            String displayFormat = scanner.nextLine();
-
-            if (displayFormat.equals("1")) {
-                System.out.print("\nSelect entity(starting from 0): ");
-                int selectedEntity = scanner.nextInt();
-                System.out.println(bottomList.get(selectedEntity));
-                break;
+        if (numOfEntities > 0 && numOfEntities <= list.size()) {
+            for (int i = list.size() - 1; i > list.size() - (numOfEntities + 1); i--) {
+                System.out.println(list.get(i) + "\n");
+                bottomList.add(list.get(i));
             }
 
-            else if (displayFormat.equals("2")) {
-                String[] fields;
-                System.out.print("\nSelect entity(starting from 0): ");
-                int selectedEntity = scanner.nextInt();
-
-                System.out.print("Select field(starting from 0): ");
+            while (true) {
+                System.out.println("1 for printing all fields of selected entity");
+                System.out.println("2 for printing selected field of selected entity");
+                System.out.println("3 for exit");
                 scanner.nextLine();
-                String selectedField = scanner.nextLine();
-                System.out.println(bottomList.get(selectedEntity).getSelectedField(selectedField));
-                break;
+                String displayFormat = scanner.nextLine();
 
-            } else if (displayFormat.equals("exit")) {
-                break;
-            } else
-                System.out.println("Please print carefully");
+                if (displayFormat.equals("1")) {
+                    System.out.print("\nSelect entity(starting from 0): ");
+                    int selectedEntity = scanner.nextInt();
+                    System.out.println(bottomList.get(selectedEntity));
+                    break;
+                }
+
+                else if (displayFormat.equals("2")) {
+                    String[] fields;
+                    System.out.print("\nSelect entity(starting from 0): ");
+                    int selectedEntity = scanner.nextInt();
+
+                    System.out.print("Select field: ");
+                    scanner.nextLine();
+                    String selectedField = scanner.nextLine().toLowerCase();
+                    System.out.println(bottomList.get(selectedEntity).getSelectedField(selectedField));
+                    break;
+
+                } else if (displayFormat.equals("exit")) {
+                    break;
+                } else
+                    System.out.println("Please print carefully");
+            }
         }
-    }
-    // #endregion
+        // #endregion
 
+    }
 }

@@ -34,25 +34,23 @@ public class FieldsIkea {
         shortDescription = fields[9];
         designer = fields[10];
 
-        // try{
-        if (fields.length > 11)
-            depth = (fields[11] == null || fields[11] == "") ? 0 : Float.parseFloat(fields[11]);
-
-        if (fields.length > 12)
-            height = (fields[12] == null || fields[12] == "") ? 0 : Float.parseFloat(fields[12]);
-
-        if (fields.length > 13)
-            width = (fields[13] == null || fields[13] == "") ? 0 : Float.parseFloat(fields[13]);
-
-        // }
-        // catch(Exception ex){
-        // System.out.println(fields[0]);
-        // return;
-        // }
-        // depth = Float.parseFloat(fields[11] == null || fields[11] == "" ? "0" :
-        // fields[11]);
-        // height = Float.parseFloat(fields[12]);
-        // width = Float.parseFloat(fields[13]);
+        if (fields.length <= 11) {
+            depth = 0.0f;
+            height = 0.0f;
+            width = 0.0f;
+        } else if (fields.length <= 12) {
+            depth = (fields[11] == null || fields[11] == "") ? 0.0f : Float.valueOf(fields[11]);
+            height = 0.0f;
+            width = 0.0f;
+        } else if (fields.length <= 13) {
+            depth = (fields[11] == null || fields[11] == "") ? 0.0f : Float.valueOf(fields[11]);
+            height = (fields[12] == null || fields[12] == "") ? 0.0f : Float.valueOf(fields[12]);
+            width = 0.0f;
+        } else {
+            depth = (fields[11] == null || fields[11] == "") ? 0.0f : Float.valueOf(fields[11]);
+            height = (fields[12] == null || fields[12] == "") ? 0.0f : Float.valueOf(fields[12]);
+            width = (fields[13] == null || fields[13] == "") ? 0.0f : Float.valueOf(fields[13]);
+        }
 
     }
 
@@ -62,10 +60,10 @@ public class FieldsIkea {
 
         switch (selectedField) {
             case "id":
-                fieldValue = getIdString();
+                fieldValue = getId().toString();
                 break;
             case "itemid":
-                fieldValue = getItemIdString();
+                fieldValue = getItemId().toString();
                 break;
             case "name":
                 fieldValue = getName();
@@ -74,13 +72,16 @@ public class FieldsIkea {
                 fieldValue = getCategory();
                 break;
             case "price":
-                fieldValue = getPriceString();
+                fieldValue = getPrice().toString();
                 break;
             case "oldprice":
                 fieldValue = getOldPrice();
                 break;
             case "sellableonline":
-                fieldValue = getSellableOnlineString();
+                fieldValue = getSellableOnline().toString();
+                break;
+            case "link":
+                fieldValue = getLink();
                 break;
             case "othercolors":
                 fieldValue = getOtherColors();
@@ -92,13 +93,13 @@ public class FieldsIkea {
                 fieldValue = getDesigner();
                 break;
             case "depth":
-                fieldValue = getDepthString();
+                fieldValue = getDepth().toString();
                 break;
             case "height":
-                fieldValue = getHeightString();
+                fieldValue = getHeight().toString();
                 break;
             case "width":
-                fieldValue = getWidthString();
+                fieldValue = getWidth().toString();
                 break;
 
         }
@@ -111,16 +112,8 @@ public class FieldsIkea {
         return id;
     }
 
-    public String getIdString() {
-        return id.toString();
-    }
-
     public Integer getItemId() {
         return itemId;
-    }
-
-    public String getItemIdString() {
-        return itemId.toString();
     }
 
     public String getName() {
@@ -135,20 +128,12 @@ public class FieldsIkea {
         return price;
     }
 
-    public String getPriceString() {
-        return price.toString();
-    }
-
     public String getOldPrice() {
         return oldPrice;
     }
 
     public Boolean getSellableOnline() {
         return sellableOnline;
-    }
-
-    public String getSellableOnlineString() {
-        return sellableOnline.toString();
     }
 
     public String getLink() {
@@ -171,25 +156,14 @@ public class FieldsIkea {
         return depth;
     }
 
-    public String getDepthString() {
-        return depth.toString();
-    }
-
     public Float getHeight() {
         return height;
-    }
-
-    public String getHeightString() {
-        return height.toString();
     }
 
     public Float getWidth() {
         return width;
     }
-    
-    public String getWidthString() {
-        return width.toString();
-    }
+
     // #endregion
 
     @Override
@@ -199,6 +173,74 @@ public class FieldsIkea {
                 + ", otherColors=" + otherColors + ", shortDescription=" + shortDescription + ", designer=" + designer
                 + ", depth=" + depth
                 + ", height=" + height + ", width=" + width + "]";
+    }
+
+    public String toCsvString() {
+        return id + "," + itemId + "," + name + "," + category + ","
+                + price + "," + oldPrice + "," + sellableOnline + "," + link
+                + "," + otherColors + "," + shortDescription + "," + designer
+                + "," + depth
+                + "," + height + "," + width + "\n";
+    }
+
+    public String getStringField(String fieldName) {
+
+        switch (fieldName) {
+            case "name":
+                return getName();
+            case "category":
+                return getCategory();
+            case "oldprice":
+                return getOldPrice();
+            case "link":
+                return getLink();
+            case "othercolors":
+                return getOtherColors();
+            case "shortdescription":
+                return getShortDescription();
+            case "designer":
+                return getShortDescription();
+            default:
+                return "";
+        }
+    }
+
+    public Float getFloatField(String fieldName) {
+
+        switch (fieldName) {
+            case "price":
+                return getPrice();
+            case "depth":
+                return getDepth();
+            case "height":
+                return getHeight();
+            case "width":
+                return getWidth();
+            default:
+                return 0f;
+        }
+    }
+
+    public Integer getIntegerField(String fieldName) {
+
+        switch (fieldName) {
+            case "id":
+                return getId();
+            case "itemid":
+                return getItemId();
+            default:
+                return 0;
+        }
+    }
+
+    public Boolean getBooleanField(String fieldName) {
+
+        switch (fieldName) {
+            case "sellableonline":
+                return getSellableOnline();
+        }
+
+        return false;
     }
 
 }

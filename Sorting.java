@@ -3,12 +3,13 @@ package finalproject;
 import java.util.*;
 
 public class Sorting {
+    static ArrayList<FieldsIkea> sortedList;//
 
     public static void sorting(ArrayList<FieldsIkea> ikeaList) {
         Scanner scanner = new Scanner(System.in);
-        ArrayList<FieldsIkea> sortedList = new ArrayList<>(ikeaList);
-        
-        System.out.println("\nSort based on field(e.g. itemId): ");
+        sortedList = ikeaList;
+
+        System.out.print("\nSort based on field(e.g. itemId): ");
         String selectedField = scanner.nextLine();
 
         System.out.println("Print \"asc\" for sorting and printing in ascending order");
@@ -59,16 +60,19 @@ public class Sorting {
         sortingOptions.put("width-asc", Comparator.comparing(FieldsIkea::getWidth));
         sortingOptions.put("width-desc", Comparator.comparing(FieldsIkea::getWidth).reversed());
 
-        sortedList.sort(sortingOptions.get(selectedField.toLowerCase() + "-" + sortingOrder.toLowerCase()));
-
-        for (int i = 0; i < sortedList.size(); i++) {
-            System.out.println(sortedList.get(i)+"\n");
+        try {
+            sortedList.sort(sortingOptions.get(selectedField.toLowerCase() + "-" + sortingOrder.toLowerCase()));
+            for (int i = 0; i < sortedList.size(); i++) {
+                System.out.println(sortedList.get(i) + "\n");
+            }
+        } catch (NullPointerException npe) {
+            System.out.println("Value of some field is null. Sort cannot be completed.");
         }
 
     }
 
-    // public static ArrayList<FieldsIkea> getSortedList() {
-    //     return sortedList;
-    // }
+    public static ArrayList<FieldsIkea> getSortedList() {
+        return sortedList;
+    }
 
 }

@@ -4,16 +4,16 @@ import java.io.*;
 import java.util.*;
 
 class Main {
+    static String columnNames = "";
+
     public static void main(String... args) {
         // #region
-
-        String columnNames[] = new String[20];
         ArrayList<FieldsIkea> ikeaList = new ArrayList<>();
 
-        try (FileReader fr = new FileReader("C:\\Users\\Nahid\\Documents\\GitHub\\finalproject\\ikeaText.csv");
+        try (FileReader fr = new FileReader("C:\\Users\\Nahid\\Documents\\GitHub\\finalproject\\ikeaText.txt");
                 BufferedReader br = new BufferedReader(fr);) {
 
-            columnNames = br.readLine().split(",");
+            columnNames = br.readLine();
             String tempString;
             String fields[];
 
