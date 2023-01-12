@@ -10,7 +10,7 @@ class Main {
         // #region
         ArrayList<FieldsIkea> ikeaList = new ArrayList<>();
 
-        try (FileReader fr = new FileReader("C:\\Users\\Nahid\\Documents\\GitHub\\finalproject\\ikeaText.txt");
+        try (FileReader fr = new FileReader("C:\\Users\\Nahid\\Documents\\GitHub\\finalproject\\ikeaText.csv");
                 BufferedReader br = new BufferedReader(fr);) {
 
             columnNames = br.readLine();
